@@ -213,7 +213,7 @@ int main(int argn, char** argv) {
   /* glutInitDisplayMode(GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH | GLUT_STENCIL); */
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_STENCIL);
   /* glutInitWindowSize(1280, 720); */
-  glutInitWindowSize(320, 180);
+  glutInitWindowSize(480, 270);
   glutInitWindowPosition(0, 0);
   glutCreateWindow("EA979a - Yugo Kuno, ra033324 - task06");
 
