@@ -17,5 +17,10 @@
     - Rotaciona e translada a matriz conforme desejado.
     - Desenha _WireSphere_ ou _SolidSphere_ conforme desejado.
     - Remove matriz de posição não mais necessária.
-  - Manda o buffer criada para ser mostrado na janela.
+  - Manda o buffer criado para ser mostrado na janela.
 - Define a _reshape callback function_:
+  - Configura o _Viewport_ e ajusta a perspectiva para o formato atual da janela.
+- Define a _keyboard callback function_:
+  - Configura os parâmetros de visualização definidos na _global struct variable_ `perspective` conforme input do teclado.
+- Mantém o programa rodando e respondendo aos _callbacks_ acima enquanto a janela estiver aberta.
+
