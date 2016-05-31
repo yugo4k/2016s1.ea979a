@@ -37,4 +37,12 @@
 
 ### Imagens de exemplo do programa
 
-![00.png](imgs/00.png) ![01.png](imgs/01.png)
+![00.png](imgs/00.png)
+![01.png](imgs/01.png)
+![02.png](imgs/02.png)
+![03.png](imgs/03.png)
+![04.png](imgs/04.png)
+![05.png](imgs/05.png)
+![06.png](imgs/06.png)
+![07.png](imgs/07.png)
+![08.png](imgs/08.png)
