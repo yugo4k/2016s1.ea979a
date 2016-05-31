@@ -37,5 +37,4 @@
 
 ### Imagens de exemplo do programa
 
-![00.png](imgs/00.png)
-![01.png](imgs/01.png)
+![00.png](imgs/00.png) ![01.png](imgs/01.png)
