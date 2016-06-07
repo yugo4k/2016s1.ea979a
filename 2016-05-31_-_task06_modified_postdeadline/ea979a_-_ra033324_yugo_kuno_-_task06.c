@@ -44,17 +44,23 @@ static void reset() {
 static void update_eye() {
   double rad_theta = perspective.deg_theta * 2. * M_PI / 360.;
   double rad_psi = perspective.deg_psi * 2. * M_PI / 360.;
-  printf("t: %4.0f\t\t", perspective.deg_theta);
-  printf("p: %4.0f\t\t", perspective.deg_psi);
   perspective.eyeX = perspective.eyeR * sin(rad_theta) * cos(rad_psi);
   perspective.eyeY = perspective.eyeR * sin(rad_theta) * sin(rad_psi);
   perspective.eyeZ = perspective.eyeR * cos(rad_theta);
-  perspective.upZ = 1. - 2. * (180 < perspective.deg_theta);
-  printf("eyeX: %5.1f\t\t", perspective.eyeX);
-  printf("eyeY: %5.1f\t\t", perspective.eyeY);
-  printf("eyeZ: %5.1f\t\t", perspective.eyeZ);
-  printf("upZ: %5.1f\t\t", perspective.upZ);
-  printf("\n");
+
+  perspective.upX = - cos(rad_theta) * cos(rad_psi);
+  perspective.upY = - cos(rad_theta) * sin(rad_psi);
+  perspective.upZ = sin(rad_theta);
+
+  /* printf("t: %4.0f\t\t", perspective.deg_theta); */
+  /* printf("p: %4.0f\t\t", perspective.deg_psi); */
+  /* printf("eyeX: %5.1f\t\t", perspective.eyeX); */
+  /* printf("eyeY: %5.1f\t\t", perspective.eyeY); */
+  /* printf("eyeZ: %5.1f\t\t", perspective.eyeZ); */
+  /* printf("upX: %5.1f\t\t", perspective.upX); */
+  /* printf("upY: %5.1f\t\t", perspective.upY); */
+  /* printf("upZ: %5.1f\t\t", perspective.upZ); */
+  /* printf("\n"); */
 }
 
 static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
