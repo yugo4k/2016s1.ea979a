@@ -4,12 +4,12 @@
 
 typedef struct {
   GLdouble eyeR;
-  GLdouble rad_theta;
-  GLdouble rad_psi;
+  GLdouble deg_theta;
+  GLdouble deg_psi;
   int wire;
-  GLfloat rot_deg_x;
-  GLfloat rot_deg_y;
-  GLfloat rot_deg_z;
+  GLfloat deg_x;
+  GLfloat deg_y;
+  GLfloat deg_z;
   GLdouble eyeX;
   GLdouble eyeY;
   GLdouble eyeZ;
@@ -26,12 +26,12 @@ Perspective perspective;
 
 static void reset() {
     perspective.eyeR = 5.5;
-    perspective.rad_theta = .5 * M_PI;
-    perspective.rad_psi = 0.;
+    perspective.deg_theta = 0.;
+    perspective.deg_psi = 0.;
     perspective.wire = 1;
-    perspective.rot_deg_x = 4.;
-    perspective.rot_deg_y = 0.;
-    perspective.rot_deg_z = 0.;
+    perspective.deg_x = 0.;
+    perspective.deg_y = 0.;
+    perspective.deg_z = 0.;
     perspective.centerX = 0.;
     perspective.centerY = 0.;
     perspective.centerZ = 0.;
@@ -42,21 +42,25 @@ static void reset() {
 
 
 static void update_eye() {
-  printf("t: %10.6f\t\t", perspective.rad_theta);
-  printf("p: %10.6f\t\t", perspective.rad_psi);
-  perspective.eyeX = perspective.eyeR * sin(perspective.rad_theta) * cos(perspective.rad_psi);
-  perspective.eyeY = perspective.eyeR * sin(perspective.rad_theta) * sin(perspective.rad_psi);
-  perspective.eyeZ = perspective.eyeR * cos(perspective.rad_theta);
-  perspective.upZ = 1. - 2. * (M_PI < perspective.rad_theta);
-  printf("eyeX: %10.6f\t\t", perspective.eyeX);
-  printf("eyeY: %10.6f\t\t", perspective.eyeY);
-  printf("eyeZ: %10.6f\n", perspective.eyeZ);
+  double rad_theta = perspective.deg_theta * 2. * M_PI / 360.;
+  double rad_psi = perspective.deg_psi * 2. * M_PI / 360.;
+  printf("t: %4.0f\t\t", perspective.deg_theta);
+  printf("p: %4.0f\t\t", perspective.deg_psi);
+  perspective.eyeX = perspective.eyeR * sin(rad_theta) * cos(rad_psi);
+  perspective.eyeY = perspective.eyeR * sin(rad_theta) * sin(rad_psi);
+  perspective.eyeZ = perspective.eyeR * cos(rad_theta);
+  perspective.upZ = 1. - 2. * (180 < perspective.deg_theta);
+  printf("eyeX: %5.1f\t\t", perspective.eyeX);
+  printf("eyeY: %5.1f\t\t", perspective.eyeY);
+  printf("eyeZ: %5.1f\t\t", perspective.eyeZ);
+  printf("upZ: %5.1f\t\t", perspective.upZ);
+  printf("\n");
 }
 
 static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
 			      GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha,
 			      GLfloat trnsl_x, GLfloat trnsl_y, GLfloat trnsl_z,
-			      GLfloat rot_deg_x, GLfloat rot_deg_y, GLfloat rot_deg_z) {
+			      GLfloat deg_x, GLfloat deg_y, GLfloat deg_z) {
   GLfloat rot_x = 0., rot_y = 0., rot_z = 0.;
   /* glPushMatrix pushes the current matrix stack down by one, duplicating the current matrix.
      That is, after a glPushMatrix call, the matrix on top of the stack is identical to the one below it. */
@@ -64,11 +68,11 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   /* glRotate produces a rotation of angle degrees around the vector (x, y, z).
      The current matrix is multiplied by a rotation matrix with the product replacing the current matrix */
   rot_x = 1., rot_y = 0., rot_z = 0.;
-  glRotatef(rot_deg_x, rot_x, rot_y, rot_z);
+  glRotatef(deg_x, rot_x, rot_y, rot_z);
   rot_x = 0., rot_y = 1., rot_z = 0.;
-  glRotatef(rot_deg_y, rot_x, rot_y, rot_z);
+  glRotatef(deg_y, rot_x, rot_y, rot_z);
   rot_x = 0., rot_y = 0., rot_z = 1.;
-  glRotatef(rot_deg_z, rot_x, rot_y, rot_z);
+  glRotatef(deg_z, rot_x, rot_y, rot_z);
   /* glTranslate produces a translation by (x, y, z).
      The current matrix is multiplied by this translation matrix, with the product replacing the current matrix */
   glTranslatef(trnsl_x, trnsl_y, trnsl_z);
@@ -87,7 +91,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
  static void display() {
   GLclampf glclmp_red = 0., glclmp_green = 0., glclmp_blue = 0., glclmp_alpha = 0.;
   GLfloat trnsl_x = 0., trnsl_y = 0., trnsl_z = 0.;
-  GLfloat  rot_deg_x = perspective.rot_deg_x, rot_deg_y = perspective.rot_deg_y, rot_deg_z = perspective.rot_deg_z;
+  GLfloat  deg_x = perspective.deg_x, deg_y = perspective.deg_y, deg_z = perspective.deg_z;
   GLfloat glf_red = 0., glf_green = 0., glf_blue = 0., glf_alpha = .01;
   GLdouble radius = 0.;
   GLint slices = 20, stacks = 20;
@@ -121,7 +125,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   basic_draw_sphere(radius, slices, stacks,
 		    glf_red, glf_green, glf_blue, glf_alpha,
 		    trnsl_x, trnsl_y, trnsl_z,
-		    rot_deg_x, rot_deg_y, rot_deg_z);
+		    deg_x, deg_y, deg_z);
 
   radius = .4;
 
@@ -131,7 +135,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   basic_draw_sphere(radius, slices, stacks,
 		    glf_red, glf_green, glf_blue, glf_alpha,
 		    trnsl_x, trnsl_y, trnsl_z,
-		    rot_deg_x, rot_deg_y, rot_deg_z);
+		    deg_x, deg_y, deg_z);
 
   /* red */
   glf_red = 1., glf_green = 0., glf_blue = 0.;
@@ -139,7 +143,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   basic_draw_sphere(radius, slices, stacks,
 		    glf_red, glf_green, glf_blue, glf_alpha,
 		    trnsl_x, trnsl_y, trnsl_z,
-		    rot_deg_x, rot_deg_y, rot_deg_z);
+		    deg_x, deg_y, deg_z);
 
   /* blue */
   glf_red = 0., glf_green = 0., glf_blue = 1.;
@@ -147,7 +151,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   basic_draw_sphere(radius, slices, stacks,
 		    glf_red, glf_green, glf_blue, glf_alpha,
 		    trnsl_x, trnsl_y, trnsl_z,
-		    rot_deg_x, rot_deg_y, rot_deg_z);
+		    deg_x, deg_y, deg_z);
 
   /* cyan */
   glf_red = 0., glf_green = 1., glf_blue = 1.;
@@ -155,7 +159,7 @@ static void basic_draw_sphere(GLdouble radius, GLint slices, GLint stacks,
   basic_draw_sphere(radius, slices, stacks,
 		    glf_red, glf_green, glf_blue, glf_alpha,
 		    trnsl_x, trnsl_y, trnsl_z,
-		    rot_deg_x, rot_deg_y, rot_deg_z);
+		    deg_x, deg_y, deg_z);
 
   /* Performs a buffer swap on the layer in use for the current window.
      Specifically, glutSwapBuffers promotes the contents of the back buffer of the layer in use of the current window to become the contents of the front buffer. */
@@ -193,8 +197,7 @@ static void reshape(int width, int height) {
 
 static void keyboard(unsigned char key, int x, int y) {
   const GLdouble EYE_STEP = .1;
-  const GLfloat STEP_DEG = 2;
-  const GLfloat STEP_RAD = M_PI / 50.;
+  const GLfloat STEP_DEG = 2.;
   switch (key) {
   case '+':
     perspective.eyeR -= EYE_STEP;
@@ -206,31 +209,34 @@ static void keyboard(unsigned char key, int x, int y) {
     perspective.wire = 1 - perspective.wire;
     break;
   case 'x':
-    perspective.rot_deg_x = (int)(perspective.rot_deg_x + STEP_DEG) % 360;
+    perspective.deg_x = (int)(perspective.deg_x + STEP_DEG) % 360;
     break;
   case 'X':
-    perspective.rot_deg_x = (int)(perspective.rot_deg_x - STEP_DEG) % 360;
+    perspective.deg_x = (int)(perspective.deg_x - STEP_DEG + 360) % 360;
     break;
   case 'y':
-    perspective.rot_deg_y = (int)(perspective.rot_deg_y + STEP_DEG) % 360;
+    perspective.deg_y = (int)(perspective.deg_y + STEP_DEG) % 360;
     break;
   case 'Y':
-    perspective.rot_deg_y = (int)(perspective.rot_deg_y - STEP_DEG) % 360;
+    perspective.deg_y = (int)(perspective.deg_y - STEP_DEG + 360) % 360;
     break;
   case 'z':
-    perspective.rot_deg_z = (int)(perspective.rot_deg_z + STEP_DEG) % 360;
+    perspective.deg_z = (int)(perspective.deg_z + STEP_DEG) % 360;
     break;
   case 'Z':
-    perspective.rot_deg_z = (int)(perspective.rot_deg_z - STEP_DEG) % 360;
-    /* perspective.eyeX = perspective.eyeR * ; */
-    /* perspective.eyeY = 5.5; */
-    /* perspective.eyeZ = 0.; */
+    perspective.deg_z = (int)(perspective.deg_z - STEP_DEG + 360) % 360;
     break;
   case 't':
-    perspective.rad_theta = fmod(perspective.rad_theta + STEP_RAD, 2 * M_PI);
+    perspective.deg_theta = (int)(perspective.deg_theta + STEP_DEG) % 360;
     break;
   case 'T':
-    perspective.rad_theta = fmod(perspective.rad_theta - STEP_RAD + 2. * M_PI, 2. * M_PI);
+    perspective.deg_theta = (int)(perspective.deg_theta - STEP_DEG + 360) % 360;
+    break;
+  case 'p':
+    perspective.deg_psi = (int)(perspective.deg_psi + STEP_DEG) % 360;
+    break;
+  case 'P':
+    perspective.deg_psi = (int)(perspective.deg_psi - STEP_DEG + 360) % 360;
     break;
   case 'r':
     reset();
