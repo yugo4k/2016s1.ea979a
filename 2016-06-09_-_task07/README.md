@@ -10,7 +10,7 @@
 - A função `reset` foi criada para reiniciar a perspectiva.
 - A função `reshape` foi alterada para atender os requisitos do enunciado.
 - A função `keyboard` foi alterada para que a interface recebesse novos comandos que atendem o enunciado.
-- A função `reshape` foi chamada no final da função `keyboard` uma vez que o que se pede no enunciado não poderia ser mostrado a não ser que a janela fosse redimensionada, o que é impraticável. Desta forma é possível atender o que se pede no enunciado e permitir as alterações de perspectiva pedidas interativamente.
+- A função `reshape` foi chamada no final da função `keyboard` uma vez que o que se pede no enunciado não poderia ser mostrado de outra forma a não ser que a janela fosse redimensionada, o que é impraticável. Desta forma é possível atender o que se pede no enunciado e permitir as alterações de perspectiva pedidas interativamente.
 
 #### Lista de comandos
 
