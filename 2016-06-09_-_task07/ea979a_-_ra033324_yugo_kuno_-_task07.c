@@ -6,10 +6,6 @@ typedef struct {
   GLdouble eyeR;
   GLdouble deg_theta;
   GLdouble deg_psi;
-  int wire;
-  GLfloat deg_x;
-  GLfloat deg_y;
-  GLfloat deg_z;
   GLdouble eyeX;
   GLdouble eyeY;
   GLdouble eyeZ;
@@ -41,10 +37,6 @@ static void reset() {
     perspective.eyeR = 5.;
     perspective.deg_theta = 30.;
     perspective.deg_psi = 150.;
-    perspective.wire = 1;
-    perspective.deg_x = 0.;
-    perspective.deg_y = 0.;
-    perspective.deg_z = 0.;
     perspective.centerX = 0.;
     perspective.centerY = 0.;
     perspective.centerZ = 0.;
@@ -321,27 +313,6 @@ static void keyboard(unsigned char key, int x, int y) {
     break;
   case '-':
     perspective.eyeR += EYE_STEP;
-    break;
-  case 'w':
-    perspective.wire = 1 - perspective.wire;
-    break;
-  case 'x':
-    perspective.deg_x = (int)(perspective.deg_x + STEP_DEG) % 360;
-    break;
-  case 'X':
-    perspective.deg_x = (int)(perspective.deg_x - STEP_DEG + 360) % 360;
-    break;
-  case 'y':
-    perspective.deg_y = (int)(perspective.deg_y + STEP_DEG) % 360;
-    break;
-  case 'Y':
-    perspective.deg_y = (int)(perspective.deg_y - STEP_DEG + 360) % 360;
-    break;
-  case 'z':
-    perspective.deg_z = (int)(perspective.deg_z + STEP_DEG) % 360;
-    break;
-  case 'Z':
-    perspective.deg_z = (int)(perspective.deg_z - STEP_DEG + 360) % 360;
     break;
   case 't':
     perspective.deg_theta = (int)(perspective.deg_theta + STEP_DEG) % 360;
