@@ -6,6 +6,8 @@
 
 ### 1. `minimal_exe6`
 
+![1_0.png](imgs/1_0.png)
+
 - A _global struct variable_ `perspective` foi criada para manter as variáveis de perspectiva do programa.
 - A função `reset` foi criada para reiniciar a perspectiva.
 - A função `reshape` foi alterada para atender os requisitos do enunciado.
@@ -24,6 +26,8 @@
 - `c` e `C` continuam realizando a operação original do algoritmo recebido.
 
 ### 2. Três objetos distintos
+
+![2_0.png](imgs/2_0.png)
 
 #### Lista de comandos
 
