@@ -1,3 +1,8 @@
+/* by yugo kuno, ra033324 */
+/* copyleft material: free to reuse, but acknowledgement required! */
+/* ea979a, task07 */
+/* 2016-06-08 */
+
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
@@ -345,7 +350,7 @@ int main(int argn, char** argv) {
   /* glutInitWindowSize(1280, 720); */
   glutInitWindowSize(640, 360);
   glutInitWindowPosition(0, 0);
-  glutCreateWindow("EA979a - Yugo Kuno, ra033324 - task06");
+  glutCreateWindow("EA979a - Yugo Kuno, ra033324 - task07");
 
   /* glEnable(GL_BLEND); */
   /* glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); */
